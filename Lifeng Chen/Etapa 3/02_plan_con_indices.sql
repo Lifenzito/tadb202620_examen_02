@@ -1,4 +1,8 @@
--- Lifeng Chen | SIGAA 000215708 | MySQL 8.4 | Etapa 3
+--NOMBRE:   lifeng chen
+--ID:       215708
+--NOMBRE:   Santiago Lopez
+--ID:       229668
+--| MySQL 8.4 | Etapa 3
 -- Comparo la misma consulta; conservo PK, UNIQUE y restricciones FK.
 -- Ejecuto en una copia de pruebas sin escrituras concurrentes.
 -- Si interrumpo el archivo, ejecuto 03_restaurar_indices.sql.

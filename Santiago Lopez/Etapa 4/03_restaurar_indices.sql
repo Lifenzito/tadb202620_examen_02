@@ -1,4 +1,8 @@
--- Lifeng Chen | SIGAA 000215708 | MySQL 8.4
+--NOMBRE:   lifeng chen
+--ID:       215708
+--NOMBRE:   Santiago Lopez
+--ID:       229668
+--| MySQL 8.4
 USE brechas_seguridad;
 ALTER TABLE exposicion_usuario ALTER INDEX ix_exposicion_usuario_fecha VISIBLE;
 

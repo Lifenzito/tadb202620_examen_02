@@ -1,4 +1,8 @@
--- Lifeng Chen | SIGAA 000215708 | MySQL 8.4 | brechas_seguridad
+--NOMBRE:   lifeng chen
+--ID:       215708
+--NOMBRE:   Santiago Lopez
+--ID:       229668
+-- | MySQL 8.4 | brechas_seguridad
 -- Etapa 4: historial de exposicion por codigo de usuario.
 USE brechas_seguridad;
 
