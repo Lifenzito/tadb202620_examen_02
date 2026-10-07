@@ -1,3 +1,7 @@
+--NOMBRE:   Santiago Lopez
+--ID:       229668
+--NOMBRE:   lifeng chen
+--ID:       215708
 -- Creación de tablas - Cadena de Frío
 -- Ejecutar conectado a la base de datos con el usuario: santiago
 
