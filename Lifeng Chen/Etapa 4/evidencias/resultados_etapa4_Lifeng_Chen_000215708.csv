@@ -1,0 +1,21 @@
+codigo_usuario,codigo_brecha,tipo_dato,categoria_sensibilidad,organizacion,fecha_notificacion
+US-003386,BR-00535,Historial de Transacciones,Alta,Wood-Clarke,2022-03-31
+US-003386,BR-00535,Nombre Completo,Baja,Wood-Clarke,2022-05-10
+US-003386,BR-00535,Numero Telefonico,Baja,Wood-Clarke,2022-05-23
+US-003386,BR-00615,Nombre Completo,Baja,Wood-Clarke,2023-09-12
+US-003386,BR-00292,Contrasena,Alta,Wood-Clarke,2023-10-11
+US-003386,BR-00292,Direccion Fisica,Media,Wood-Clarke,2023-11-15
+US-003386,BR-00074,Numero de Identificacion,Alta,Wood-Clarke,2024-04-05
+US-003386,BR-00238,Numero de Tarjeta de Credito,Critica,Wood-Clarke,2024-06-26
+US-003386,BR-00238,Numero Telefonico,Baja,Wood-Clarke,2024-09-03
+US-003386,BR-00732,Direccion Fisica,Media,Wood-Clarke,2024-11-05
+US-003386,BR-00732,Historial Medico,Critica,Wood-Clarke,2024-11-17
+US-003386,BR-00371,Direccion Fisica,Media,Wood-Clarke,2025-08-13
+US-003386,BR-00734,Direccion Fisica,Media,Wood-Clarke,2025-08-24
+US-003386,BR-00734,Numero de Identificacion,Alta,Wood-Clarke,2025-09-12
+US-003386,BR-00645,Historial de Transacciones,Alta,Wood-Clarke,2026-01-02
+US-003386,BR-00645,Numero de Tarjeta de Credito,Critica,Wood-Clarke,2026-01-07
+US-003386,BR-00733,Numero de Tarjeta de Credito,Critica,Wood-Clarke,2026-06-20
+US-003386,BR-00232,Numero de Identificacion,Alta,Wood-Clarke,2026-09-22
+US-003386,BR-00232,Numero Telefonico,Baja,Wood-Clarke,2026-09-22
+US-003386,BR-00449,Historial de Transacciones,Alta,Wood-Clarke,2026-09-22

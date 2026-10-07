@@ -1,0 +1,11 @@
+Lifeng Chen | SIGAA 000215708 | MySQL 8.4
+-> Sort: e.fecha_notificacion, b.codigo_brecha, t.nombre  (actual time=0.0935..0.0946 rows=20 loops=1)
+    -> Stream results  (cost=24 rows=20) (actual time=0.0255..0.0773 rows=20 loops=1)
+        -> Nested loop inner join  (cost=24 rows=20) (actual time=0.022..0.0658 rows=20 loops=1)
+            -> Nested loop inner join  (cost=17 rows=20) (actual time=0.0179..0.0569 rows=20 loops=1)
+                -> Nested loop inner join  (cost=10 rows=20) (actual time=0.0121..0.0313 rows=20 loops=1)
+                    -> Covering index lookup on e using ix_exposicion_usuario_fecha (id_usuario='3340')  (cost=3.05 rows=20) (actual time=0.00751..0.0114 rows=20 loops=1)
+                    -> Single-row index lookup on t using PRIMARY (id_tipo_dato=e.id_tipo_dato)  (cost=0.255 rows=1) (actual time=804e-6..827e-6 rows=1 loops=20)
+                -> Single-row index lookup on b using PRIMARY (id_brecha=e.id_brecha)  (cost=0.255 rows=1) (actual time=0.00111..0.00113 rows=1 loops=20)
+            -> Single-row index lookup on o using PRIMARY (id_organizacion=b.id_organizacion)  (cost=0.255 rows=1) (actual time=261e-6..286e-6 rows=1 loops=20)
+
