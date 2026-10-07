@@ -1,0 +1,7 @@
+tabla,obtenido,esperado,resultado
+organizacion,60,60,OK
+brecha,800,800,OK
+usuario,7887,7887,OK
+tipo_dato,10,10,OK
+exposicion_usuario,40000,40000,OK
+stg_sabana,40000,40000,OK

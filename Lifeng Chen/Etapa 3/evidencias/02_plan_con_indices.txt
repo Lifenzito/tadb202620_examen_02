@@ -1,0 +1,221 @@
+Lifeng Chen | SIGAA 000215708 | MySQL 8.4
+TABLE_NAME	INDEX_NAME	IS_VISIBLE
+brecha	fk_brecha_organizacion	YES
+brecha	ix_brecha_deteccion_severidad	YES
+brecha	PRIMARY	YES
+brecha	uq_brecha_codigo	YES
+exposicion_usuario	ix_exposicion_tipo_brecha_usuario	YES
+exposicion_usuario	ix_exposicion_usuario_fecha	YES
+exposicion_usuario	PRIMARY	YES
+organizacion	PRIMARY	YES
+organizacion	uq_organizacion_nombre	YES
+tipo_dato	PRIMARY	YES
+tipo_dato	uq_tipo_dato_nombre	YES
+usuario	fk_usuario_organizacion	YES
+usuario	PRIMARY	YES
+usuario	uq_usuario_codigo	YES
+usuario	uq_usuario_email_hash	YES
+usuario	uq_usuario_pseudonimo	YES
+EXPLAIN
+{
+  "query_block": {
+    "select_id": 1,
+    "cost_info": {
+      "query_cost": "891.30"
+    },
+    "ordering_operation": {
+      "using_filesort": true,
+      "grouping_operation": {
+        "using_temporary_table": true,
+        "using_filesort": true,
+        "buffer_result": {
+          "using_temporary_table": true,
+          "nested_loop": [
+            {
+              "duplicates_removal": {
+                "using_temporary_table": true,
+                "nested_loop": [
+                  {
+                    "table": {
+                      "table_name": "t",
+                      "access_type": "ALL",
+                      "possible_keys": [
+                        "PRIMARY"
+                      ],
+                      "rows_examined_per_scan": 10,
+                      "rows_produced_per_join": 1,
+                      "filtered": "10.00",
+                      "cost_info": {
+                        "read_cost": "1.15",
+                        "eval_cost": "0.10",
+                        "prefix_cost": "1.25",
+                        "data_read_per_join": "208"
+                      },
+                      "used_columns": [
+                        "id_tipo_dato",
+                        "categoria_sensibilidad"
+                      ],
+                      "attached_condition": "(`brechas_seguridad`.`t`.`categoria_sensibilidad` = 'Critica')"
+                    }
+                  },
+                  {
+                    "table": {
+                      "table_name": "b",
+                      "access_type": "range",
+                      "possible_keys": [
+                        "PRIMARY",
+                        "fk_brecha_organizacion",
+                        "ix_brecha_deteccion_severidad"
+                      ],
+                      "key": "ix_brecha_deteccion_severidad",
+                      "used_key_parts": [
+                        "severidad",
+                        "fecha_deteccion"
+                      ],
+                      "key_length": "45",
+                      "rows_examined_per_scan": 109,
+                      "rows_produced_per_join": 109,
+                      "filtered": "100.00",
+                      "index_condition": "((`brechas_seguridad`.`b`.`fecha_deteccion` between <cache>((@`fecha_inicio`)) and <cache>((@`fecha_final`))) and (`brechas_seguridad`.`b`.`severidad` in ('Alta','Critica')))",
+                      "using_join_buffer": "hash join",
+                      "cost_info": {
+                        "read_cost": "38.66",
+                        "eval_cost": "10.90",
+                        "prefix_cost": "50.81",
+                        "data_read_per_join": "37K"
+                      },
+                      "used_columns": [
+                        "id_brecha",
+                        "codigo_brecha",
+                        "id_organizacion",
+                        "vector_ataque",
+                        "severidad",
+                        "fecha_deteccion"
+                      ]
+                    }
+                  },
+                  {
+                    "table": {
+                      "table_name": "o",
+                      "access_type": "eq_ref",
+                      "possible_keys": [
+                        "PRIMARY"
+                      ],
+                      "key": "PRIMARY",
+                      "used_key_parts": [
+                        "id_organizacion"
+                      ],
+                      "key_length": "4",
+                      "ref": [
+                        "brechas_seguridad.b.id_organizacion"
+                      ],
+                      "rows_examined_per_scan": 1,
+                      "rows_produced_per_join": 109,
+                      "filtered": "100.00",
+                      "cost_info": {
+                        "read_cost": "27.25",
+                        "eval_cost": "10.90",
+                        "prefix_cost": "88.96",
+                        "data_read_per_join": "78K"
+                      },
+                      "used_columns": [
+                        "id_organizacion",
+                        "nombre"
+                      ]
+                    }
+                  },
+                  {
+                    "table": {
+                      "table_name": "ec",
+                      "access_type": "ref",
+                      "possible_keys": [
+                        "PRIMARY",
+                        "ix_exposicion_tipo_brecha_usuario"
+                      ],
+                      "key": "ix_exposicion_tipo_brecha_usuario",
+                      "used_key_parts": [
+                        "id_tipo_dato",
+                        "id_brecha"
+                      ],
+                      "key_length": "8",
+                      "ref": [
+                        "brechas_seguridad.t.id_tipo_dato",
+                        "brechas_seguridad.b.id_brecha"
+                      ],
+                      "rows_examined_per_scan": 5,
+                      "rows_produced_per_join": 109,
+                      "filtered": "100.00",
+                      "using_index": true,
+                      "cost_info": {
+                        "read_cost": "108.40",
+                        "eval_cost": "10.90",
+                        "prefix_cost": "318.88",
+                        "data_read_per_join": "2K"
+                      },
+                      "used_columns": [
+                        "id_brecha",
+                        "id_usuario",
+                        "id_tipo_dato"
+                      ]
+                    }
+                  }
+                ]
+              }
+            },
+            {
+              "table": {
+                "table_name": "e",
+                "access_type": "ref",
+                "possible_keys": [
+                  "PRIMARY"
+                ],
+                "key": "PRIMARY",
+                "used_key_parts": [
+                  "id_brecha"
+                ],
+                "key_length": "4",
+                "ref": [
+                  "brechas_seguridad.b.id_brecha"
+                ],
+                "rows_examined_per_scan": 49,
+                "rows_produced_per_join": 5412,
+                "filtered": "100.00",
+                "using_index": true,
+                "cost_info": {
+                  "read_cost": "31.13",
+                  "eval_cost": "541.29",
+                  "prefix_cost": "891.30",
+                  "data_read_per_join": "126K"
+                },
+                "used_columns": [
+                  "id_brecha",
+                  "id_usuario",
+                  "id_tipo_dato"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
+EXPLAIN
+-> Sort: usuarios_afectados DESC, b.codigo_brecha  (actual time=9.69..9.7 rows=109 loops=1)
+    -> Stream results  (actual time=7.08..9.66 rows=109 loops=1)
+        -> Group aggregate: count(distinct exposicion_usuario.id_usuario)  (actual time=7.08..9.62 rows=109 loops=1)
+            -> Sort: b.id_brecha, o.nombre, b.codigo_brecha, b.fecha_deteccion, b.vector_ataque  (actual time=7.04..7.39 rows=5422 loops=1)
+                -> Stream results  (cost=3005 rows=27218) (actual time=0.0901..3.9 rows=5422 loops=1)
+                    -> Nested loop inner join  (cost=3005 rows=27218) (actual time=0.088..2.55 rows=5422 loops=1)
+                        -> Remove duplicate b rows using temporary table (weedout)  (cost=252 rows=548) (actual time=0.0763..1.09 rows=109 loops=1)
+                            -> Nested loop inner join  (cost=252 rows=548) (actual time=0.0747..0.953 rows=1050 loops=1)
+                                -> Nested loop inner join  (cost=89 rows=109) (actual time=0.0684..0.383 rows=218 loops=1)
+                                    -> Inner hash join (no condition)  (cost=50.8 rows=109) (actual time=0.0635..0.254 rows=218 loops=1)
+                                        -> Index range scan on b using ix_brecha_deteccion_severidad over (severidad = 'Alta' AND '2025-09-22' <= fecha_deteccion <= '2026-09-22') OR (severidad = 'Critica' AND '2025-09-22' <= fecha_deteccion <= '2026-09-22'), with index condition: ((b.fecha_deteccion between <cache>((@fecha_inicio)) and <cache>((@fecha_final))) and (b.severidad in ('Alta','Critica')))  (cost=49.6 rows=109) (actual time=0.0462..0.214 rows=109 loops=1)
+                                        -> Hash
+                                            -> Filter: (t.categoria_sensibilidad = 'Critica')  (cost=1.25 rows=1) (actual time=0.00918..0.0108 rows=2 loops=1)
+                                                -> Table scan on t  (cost=1.25 rows=10) (actual time=0.00704..0.00903 rows=10 loops=1)
+                                    -> Single-row index lookup on o using PRIMARY (id_organizacion=b.id_organizacion)  (cost=0.251 rows=1) (actual time=430e-6..453e-6 rows=1 loops=218)
+                                -> Covering index lookup on ec using ix_exposicion_tipo_brecha_usuario (id_tipo_dato=t.id_tipo_dato, id_brecha=b.id_brecha)  (cost=5.02 rows=5.03) (actual time=0.0016..0.0023 rows=4.82 loops=218)
+                        -> Covering index lookup on e using PRIMARY (id_brecha=b.id_brecha)  (cost=0.331 rows=49.7) (actual time=0.00697..0.0107 rows=49.7 loops=109)
+
