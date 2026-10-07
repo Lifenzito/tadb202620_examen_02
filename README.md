@@ -13,6 +13,6 @@ El trabajo está separado por estudiante para que se pueda identificar con clari
 
 ## Organización actual
 
-- `Lifeng Chen/`: contiene la evidencia de la Etapa 1 realizada con MySQL 8.4.
-- `Santiago Lopez/`: espacio reservado para los entregables realizados con PostgreSQL 18.x.
-
+- `Lifeng Chen/`: contiene las Etapas 1 y 2 implementadas para MySQL 8.4.
+- `Santiago Lopez/`: contiene las Etapas 1 y 2 implementadas para PostgreSQL 18.x.
+- `datos_brechas/`: contiene los cuatro lotes CSV suministrados para el examen.
