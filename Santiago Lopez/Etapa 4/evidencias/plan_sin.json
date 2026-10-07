@@ -1,0 +1,175 @@
+{
+  "autor": "Lifeng Chen | SIGAA 000215708 | MySQL 8.4",
+  "explain": {
+    "query_block": {
+      "select_id": 1,
+      "cost_info": {
+        "query_cost": "916.00"
+      },
+      "ordering_operation": {
+        "using_temporary_table": true,
+        "using_filesort": true,
+        "nested_loop": [
+          {
+            "table": {
+              "table_name": "u",
+              "access_type": "const",
+              "possible_keys": [
+                "PRIMARY",
+                "uq_usuario_codigo"
+              ],
+              "key": "uq_usuario_codigo",
+              "used_key_parts": [
+                "codigo_usuario"
+              ],
+              "key_length": "42",
+              "ref": [
+                "const"
+              ],
+              "rows_examined_per_scan": 1,
+              "rows_produced_per_join": 1,
+              "filtered": "100.00",
+              "using_index": true,
+              "cost_info": {
+                "read_cost": "0.00",
+                "eval_cost": "0.10",
+                "prefix_cost": "0.00",
+                "data_read_per_join": "504"
+              },
+              "used_columns": [
+                "id_usuario",
+                "codigo_usuario"
+              ]
+            }
+          },
+          {
+            "table": {
+              "table_name": "o",
+              "access_type": "index",
+              "possible_keys": [
+                "PRIMARY"
+              ],
+              "key": "uq_organizacion_nombre",
+              "used_key_parts": [
+                "nombre"
+              ],
+              "key_length": "402",
+              "rows_examined_per_scan": 60,
+              "rows_produced_per_join": 60,
+              "filtered": "100.00",
+              "using_index": true,
+              "cost_info": {
+                "read_cost": "0.25",
+                "eval_cost": "6.00",
+                "prefix_cost": "6.25",
+                "data_read_per_join": "43K"
+              },
+              "used_columns": [
+                "id_organizacion",
+                "nombre"
+              ]
+            }
+          },
+          {
+            "table": {
+              "table_name": "b",
+              "access_type": "ref",
+              "possible_keys": [
+                "PRIMARY",
+                "fk_brecha_organizacion"
+              ],
+              "key": "fk_brecha_organizacion",
+              "used_key_parts": [
+                "id_organizacion"
+              ],
+              "key_length": "4",
+              "ref": [
+                "brechas_seguridad.o.id_organizacion"
+              ],
+              "rows_examined_per_scan": 13,
+              "rows_produced_per_join": 799,
+              "filtered": "100.00",
+              "cost_info": {
+                "read_cost": "200.00",
+                "eval_cost": "80.00",
+                "prefix_cost": "286.25",
+                "data_read_per_join": "274K"
+              },
+              "used_columns": [
+                "id_brecha",
+                "codigo_brecha",
+                "id_organizacion"
+              ]
+            }
+          },
+          {
+            "table": {
+              "table_name": "e",
+              "access_type": "ref",
+              "possible_keys": [
+                "PRIMARY",
+                "ix_exposicion_tipo_brecha_usuario"
+              ],
+              "key": "PRIMARY",
+              "used_key_parts": [
+                "id_brecha",
+                "id_usuario"
+              ],
+              "key_length": "8",
+              "ref": [
+                "brechas_seguridad.b.id_brecha",
+                "const"
+              ],
+              "rows_examined_per_scan": 1,
+              "rows_produced_per_join": 954,
+              "filtered": "100.00",
+              "cost_info": {
+                "read_cost": "200.00",
+                "eval_cost": "95.50",
+                "prefix_cost": "581.75",
+                "data_read_per_join": "22K"
+              },
+              "used_columns": [
+                "id_brecha",
+                "id_usuario",
+                "id_tipo_dato",
+                "fecha_notificacion"
+              ]
+            }
+          },
+          {
+            "table": {
+              "table_name": "t",
+              "access_type": "eq_ref",
+              "possible_keys": [
+                "PRIMARY"
+              ],
+              "key": "PRIMARY",
+              "used_key_parts": [
+                "id_tipo_dato"
+              ],
+              "key_length": "4",
+              "ref": [
+                "brechas_seguridad.e.id_tipo_dato"
+              ],
+              "rows_examined_per_scan": 1,
+              "rows_produced_per_join": 954,
+              "filtered": "100.00",
+              "cost_info": {
+                "read_cost": "238.75",
+                "eval_cost": "95.50",
+                "prefix_cost": "916.00",
+                "data_read_per_join": "193K"
+              },
+              "used_columns": [
+                "id_tipo_dato",
+                "nombre",
+                "categoria_sensibilidad"
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

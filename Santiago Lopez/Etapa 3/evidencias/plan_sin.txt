@@ -1,0 +1,22 @@
+Lifeng Chen | SIGAA 000215708 | MySQL 8.4
+-> Sort: usuarios_afectados DESC, b.codigo_brecha  (actual time=12.1..12.1 rows=109 loops=1)
+    -> Stream results  (actual time=9.52..12.1 rows=109 loops=1)
+        -> Group aggregate: count(distinct exposicion_usuario.id_usuario)  (actual time=9.51..12 rows=109 loops=1)
+            -> Sort: b.id_brecha, o.nombre, b.codigo_brecha, b.fecha_deteccion, b.vector_ataque  (actual time=9.48..9.82 rows=5422 loops=1)
+                -> Stream results  (cost=94.9 rows=97.4) (actual time=0.0837..6.32 rows=5422 loops=1)
+                    -> Nested loop inner join  (cost=94.9 rows=97.4) (actual time=0.0813..4.97 rows=5422 loops=1)
+                        -> Remove duplicate b rows using temporary table (weedout)  (cost=80.1 rows=1.96) (actual time=0.0736..3.76 rows=109 loops=1)
+                            -> Nested loop inner join  (cost=80.1 rows=1.96) (actual time=0.071..3.61 rows=1050 loops=1)
+                                -> Nested loop inner join  (cost=73 rows=0.395) (actual time=0.0563..0.763 rows=218 loops=1)
+                                    -> Filter: (b.fecha_deteccion between <cache>((@fecha_inicio)) and <cache>((@fecha_final)))  (cost=68.5 rows=0.395) (actual time=0.05..0.622 rows=218 loops=1)
+                                        -> Inner hash join (no condition)  (cost=68.5 rows=0.395) (actual time=0.0427..0.43 rows=812 loops=1)
+                                            -> Filter: (b.severidad in ('Alta','Critica'))  (cost=67.3 rows=17.8) (actual time=0.0222..0.338 rows=406 loops=1)
+                                                -> Table scan on b  (cost=67.3 rows=800) (actual time=0.0211..0.233 rows=800 loops=1)
+                                            -> Hash
+                                                -> Filter: (t.categoria_sensibilidad = 'Critica')  (cost=1.25 rows=1) (actual time=0.0119..0.0135 rows=2 loops=1)
+                                                    -> Table scan on t  (cost=1.25 rows=10) (actual time=0.00948..0.0115 rows=10 loops=1)
+                                    -> Single-row index lookup on o using PRIMARY (id_organizacion=b.id_organizacion)  (cost=0.256 rows=1) (actual time=483e-6..506e-6 rows=1 loops=218)
+                                -> Filter: (ec.id_tipo_dato = t.id_tipo_dato)  (cost=1.56 rows=4.97) (actual time=0.00705..0.0127 rows=4.82 loops=218)
+                                    -> Covering index lookup on ec using PRIMARY (id_brecha=b.id_brecha)  (cost=1.56 rows=49.7) (actual time=0.00579..0.0101 rows=49.7 loops=218)
+                        -> Covering index lookup on e using PRIMARY (id_brecha=b.id_brecha)  (cost=0.565 rows=49.7) (actual time=0.00499..0.00851 rows=49.7 loops=109)
+

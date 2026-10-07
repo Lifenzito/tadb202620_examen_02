@@ -1,0 +1,17 @@
+TABLE_NAME,INDEX_NAME,IS_VISIBLE
+brecha,fk_brecha_organizacion,YES
+brecha,ix_brecha_deteccion_severidad,YES
+brecha,PRIMARY,YES
+brecha,uq_brecha_codigo,YES
+exposicion_usuario,ix_exposicion_tipo_brecha_usuario,YES
+exposicion_usuario,ix_exposicion_usuario_fecha,YES
+exposicion_usuario,PRIMARY,YES
+organizacion,PRIMARY,YES
+organizacion,uq_organizacion_nombre,YES
+tipo_dato,PRIMARY,YES
+tipo_dato,uq_tipo_dato_nombre,YES
+usuario,fk_usuario_organizacion,YES
+usuario,PRIMARY,YES
+usuario,uq_usuario_codigo,YES
+usuario,uq_usuario_email_hash,YES
+usuario,uq_usuario_pseudonimo,YES

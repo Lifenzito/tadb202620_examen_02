@@ -1,0 +1,73 @@
+=== 00_creacion_tablas.sql ===
+
+=== 01_carga_de_datos.sql ===
+tabla	esperado	obtenido	resultado
+organizacion	60	60	OK
+brecha	800	800	OK
+usuario	7887	7887	OK
+tipo_dato	10	10	OK
+exposicion_usuario	40000	40000	OK
+filas_no_reconstruidas
+0
+usuarios_con_org_distinta_a_la_brecha
+0
+Table	Op	Msg_type	Msg_text
+brechas_seguridad.organizacion	analyze	status	OK
+brechas_seguridad.brecha	analyze	status	OK
+brechas_seguridad.usuario	analyze	status	OK
+brechas_seguridad.tipo_dato	analyze	status	OK
+brechas_seguridad.exposicion_usuario	analyze	status	OK
+id_organizacion	nombre	sector	pais	tamano_empleados
+1	Acosta, Williams and Mcmillan	Energia	Costa Rica	25000
+2	Adams LLC	Tecnologia	Mexico	2500
+3	Adams-Fowler	Tecnologia	Brasil	100
+4	Baker-Stewart	Telecomunicaciones	Argentina	100
+5	Bell-Williams	Retail	Colombia	250
+id_tipo_dato	nombre	categoria_sensibilidad
+1	Contrasena	Alta
+2	Correo Electronico	Media
+3	Direccion Fisica	Media
+4	Fecha de Nacimiento	Baja
+5	Historial de Transacciones	Alta
+6	Historial Medico	Critica
+7	Nombre Completo	Baja
+8	Numero de Identificacion	Alta
+9	Numero de Tarjeta de Credito	Critica
+10	Numero Telefonico	Baja
+id_brecha	codigo_brecha	id_organizacion	vector_ataque	severidad	fecha_ocurrencia	fecha_deteccion	registros_afectados	costo_estimado
+1	BR-00001	26	Ataque a Cadena de Suministro	Alta	2021-10-09	2022-04-20	4603123	11498713.58
+2	BR-00002	19	Credenciales Filtradas de Terceros	Alta	2022-09-22	2023-01-13	1368625	12878819.57
+3	BR-00003	39	Ransomware	Critica	2024-07-13	2025-03-03	1387213	9029452.31
+4	BR-00004	44	Inyeccion SQL	Media	2024-05-29	2025-01-10	4594892	6011042.42
+5	BR-00005	4	Insider Malicioso	Critica	2025-06-04	2025-10-10	3819496	8618761.12
+id_usuario	codigo_usuario	pseudonimo	email_hash	id_organizacion	pais_residencia	fecha_registro
+1	US-000001	user_jonesmatthew_0	192fafc71e6f716c72e6655423e2d2b7	42	Chile	2022-01-25
+2	US-000002	user_ericpoole_1	1a38310e36a3bcf38cee2ca5be9b77ac	15	Panama	2019-08-22
+3	US-000003	user_crossalicia_2	b274084cc06484b2ef7648062ea64adb	56	Estados Unidos	2026-07-22
+4	US-000004	user_ruizchristopher_3	23149fd0b4acad8c8f26c6500712e7c9	26	Peru	2023-01-04
+5	US-000005	user_ayalajason_4	caad3faddd13a0c5a9afe8ac8d5961d1	28	Chile	2022-05-02
+id_brecha	id_usuario	id_tipo_dato	fecha_notificacion
+1	497	5	2022-06-14
+1	721	5	2022-05-18
+1	1415	5	2022-05-18
+1	1563	6	2022-06-20
+1	1579	5	2022-05-29
+
+=== 02_creacion_vistas.sql ===
+
+=== 04_funcion_tiempo_brecha.sql ===
+
+=== 05_procedimiento_almacenado.sql ===
+
+=== 06_indices.sql ===
+
+=== 03_usuario_lector.sql ===
+Grants for brechas_lector@%
+GRANT USAGE ON *.* TO `brechas_lector`@`%`
+GRANT SELECT ON `brechas_seguridad`.`brecha` TO `brechas_lector`@`%`
+GRANT SELECT ON `brechas_seguridad`.`exposicion_usuario` TO `brechas_lector`@`%`
+GRANT SELECT ON `brechas_seguridad`.`organizacion` TO `brechas_lector`@`%`
+GRANT SELECT ON `brechas_seguridad`.`tipo_dato` TO `brechas_lector`@`%`
+GRANT SELECT ON `brechas_seguridad`.`usuario` TO `brechas_lector`@`%`
+GRANT SELECT ON `brechas_seguridad`.`v_exposicion_detalle` TO `brechas_lector`@`%`
+GRANT EXECUTE ON FUNCTION `brechas_seguridad`.`fn_dias_hasta_deteccion` TO `brechas_lector`@`%`
